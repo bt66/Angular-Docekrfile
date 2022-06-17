@@ -6,9 +6,9 @@ RUN npm install
 COPY . .
 #RUN pushd ./build
 #RUN npm run build
-RUN npm run ng build -- --prod --configuration $env --output-path=docs
+RUN npm run ng build -- --prod --configuration $env --output-path=/result
 #RUN popd
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/buildresult /usr/share/nginx/html
+COPY --from=build /result /usr/share/nginx/html
