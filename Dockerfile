@@ -5,7 +5,9 @@ COPY package.json package-lock.json ./
 RUN npm install
 RUN npm install --save-dev @angular/cli@latest
 COPY . .
-RUN ng build --output-path=dist/buildresult
+RUN pushd ./build
+RUN npm run build
+RUN popd
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
