@@ -4,9 +4,10 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN pushd ./build
-RUN npm run build
-RUN popd
+#RUN pushd ./build
+#RUN npm run build
+RUN npm run ng build -- --prod --configuration $env --output-path=docs
+#RUN popd
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
