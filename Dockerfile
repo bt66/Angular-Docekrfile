@@ -3,7 +3,6 @@ FROM node:16.14.0-alpine AS build
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
-RUN npm install --save-dev @angular/cli@latest
 COPY . .
 RUN pushd ./build
 RUN npm run build
